@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Run All" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="nl.underkoen.adventofcode.Main" />
-    <module name="AdventOfCode.main" />
+    <module name="AdventOfCode_main" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="nl.underkoen.adventofcode.year2019.*" />

@@ -14,7 +14,7 @@ import java.util.*;
  * Created by Under_Koen on 03/02/2020.
  */
 public class Main {
-    public static final String PACKAGE = Solution.class.getPackageName();
+    public static final String PACKAGE = "nl.daandvl.solutions";
 
     public static void main(String[] args) {
         PrintStream out = System.out;
