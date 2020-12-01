@@ -3,7 +3,9 @@ package nl.underkoen.adventofcode.general;
 import lombok.*;
 
 import java.util.Collection;
-import java.util.function.ToLongBiFunction;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 /**
  * Created by Under_Koen on 11/12/2019.
@@ -15,48 +17,65 @@ import java.util.function.ToLongBiFunction;
 @With
 public class Position {
     public static Position min(Collection<Position> positions) {
-        return reduce(positions, Math::min);
+        return positions.stream()
+                .reduce(Position::min)
+                .orElseThrow();
     }
 
     public static Position max(Collection<Position> positions) {
-        return reduce(positions, Math::max);
+        return positions.stream()
+                .reduce(Position::max)
+                .orElseThrow();
     }
 
-    public static Position reduce(Collection<Position> positions, ToLongBiFunction<Long, Long> func) {
-        return positions.stream().reduce((p, p2) -> {
-            long x = func.applyAsLong(p.getX(), p2.getX());
-            long y = func.applyAsLong(p.getY(), p2.getY());
-            return new Position(x, y);
-        }).orElseThrow();
+    public static List<Position> between(Position p1, Position p2) {
+        Position min = p1.min(p2);
+        Position max = p1.max(p2);
+
+        return LongStream.range(min.getX(), max.getX() + 1)
+                .boxed()
+                .flatMap(x -> LongStream
+                        .range(min.getY(), max.getY() + 1)
+                        .boxed()
+                        .map(y -> new Position(x, y)))
+                .collect(Collectors.toList());
+    }
+
+    public static List<Position> rectangle(Position origin, long width, long height) {
+        return between(origin, origin.copyAdd(width - 1, height - 1));
     }
 
     private long x = 0;
     private long y = 0;
 
-    public void addX(long x) {
+    public Position addX(long x) {
         setX(getX() + x);
+        return this;
     }
 
-    public void addY(long y) {
+    public Position addY(long y) {
         setY(getY() + y);
+        return this;
     }
 
-    public void set(long x, long y) {
+    public Position set(long x, long y) {
         setX(x);
         setY(y);
+        return this;
     }
 
-    public void set(Position position) {
-        set(position.getX(), position.getY());
+    public Position set(Position position) {
+        return set(position.getX(), position.getY());
     }
 
-    public void add(long x, long y) {
+    public Position add(long x, long y) {
         addX(x);
         addY(y);
+        return this;
     }
 
-    public void add(Position position) {
-        add(position.getX(), position.getY());
+    public Position add(Position position) {
+        return add(position.getX(), position.getY());
     }
 
     public Position copy() {
@@ -75,12 +94,24 @@ public class Position {
         return pos;
     }
 
+    public Position min(Position position) {
+        return new Position(Math.min(x, position.x), Math.min(y, position.y));
+    }
+
+    public Position max(Position position) {
+        return new Position(Math.max(x, position.x), Math.max(y, position.y));
+    }
+
     public long distance(Position position) {
         return Math.abs(getX() - position.getX()) + Math.abs(getY() - position.getY());
     }
 
     public long distanceOrigin() {
         return Math.abs(getX()) + Math.abs(getY());
+    }
+
+    public double atan2(Position position) {
+        return Math.atan2(getY() - position.getY(), getX() - position.getX());
     }
 
     public long[] asArray() {

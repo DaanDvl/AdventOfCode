@@ -2,10 +2,11 @@ package nl.daandvl.solutions.year2020;
 
 import lombok.Getter;
 import nl.underkoen.adventofcode.solutions.Solution;
+import nl.underkoen.adventofcode.utils.InputUtils;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Day01 extends Solution {
     @Getter
@@ -20,27 +21,23 @@ public class Day01 extends Solution {
 
     @Override
     protected void run(List<String> input) {
-        List<Integer> nums = inputListToIntegers(input);
+        Set<Long> nums = InputUtils.asNumberList(input)
+                .collect(Collectors.toSet());
 
-        for (int x : nums) {
-            for (int y : nums) {
+        for (long x : nums) {
+            for (long y : nums) {
                 if(a == 0 && x+y == 2020) {
                     a = x * y;
                 }
-                for (int z : nums) {
+                for (long z : nums) {
                     if(b == 0 && x+y+z == 2020) {
                         b = x * y * z;
+                        break;
                     }
                 }
+                if(a != 0 && b != 0) break;
             }
+            if(a != 0 && b != 0) break;
         }
-    }
-
-    private List<Integer> inputListToIntegers(List<String> input) {
-        List<Integer> nums = new LinkedList<>();
-        for(String n : input) {
-            nums.add(Integer.parseInt(n));
-        }
-        return nums;
     }
 }
