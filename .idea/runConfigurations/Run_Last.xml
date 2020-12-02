@@ -2,7 +2,7 @@
   <configuration default="false" name="Run Last" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="nl.underkoen.adventofcode.solutions.SolutionRunner" />
     <module name="AdventOfCode_main" />
-    <option name="PROGRAM_PARAMETERS" value="-l" />
+    <option name="PROGRAM_PARAMETERS" value="-l -p nl.daandvl.solutions" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="nl.underkoen.adventofcode.*" />
