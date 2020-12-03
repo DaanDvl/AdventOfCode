@@ -96,7 +96,9 @@ class SolutionUtils {
             HttpEntity entity = httpclient.execute(httpPost).getEntity();
 
             String answer = EntityUtils.toString(entity);
-            return answer.split("article")[1];
+            answer = "<p" + answer.split("article")[1] + "p>";
+            answer = answer.replaceAll("\\<.*?\\>", "");
+            return answer;
         }
 
     }
