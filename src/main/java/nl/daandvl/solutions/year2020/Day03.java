@@ -24,7 +24,6 @@ public class Day03 extends Solution {
             new Slope(1,2)
     };
 
-
     @Override
     protected void run(List<String> input) {
         b = 1;
@@ -35,8 +34,11 @@ public class Day03 extends Solution {
         }
     }
 
+    public int fieldWidth;
+
     public char getCharAtCoordinate(List<String> field, int x, int y) {
-        if(y >= field.size()) return 'e';
+        if (fieldWidth == 0) fieldWidth = field.size();
+        if (y >= fieldWidth) return 'e';
         String row = field.get(y);
         int index = x % row.length();
         return row.charAt(index);
