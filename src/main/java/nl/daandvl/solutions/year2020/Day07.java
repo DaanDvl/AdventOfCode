@@ -17,13 +17,8 @@ public class Day07 extends Solution {
 
     @Override
     public long[] getCorrectOutput() {
-        return new long[]{};
+        return new long[]{161, 30899};
     }
-
-//    @Override
-//    public String[] getCorrectOutputText() {
-//        return new String[]{};
-//    }
 
     @Override
     protected void run(List<String> input) {
