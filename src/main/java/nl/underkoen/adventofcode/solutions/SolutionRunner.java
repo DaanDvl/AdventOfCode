@@ -88,11 +88,17 @@ public class SolutionRunner implements Runnable {
             if (day != null) {
                 entry.getValue().removeIf(s -> s.getDay() != day);
             }
-
             entry.getValue().sort(Comparator.comparingInt(SolutionInfo::getDay));
+
+            long start = System.currentTimeMillis();
+
             for (Solution solution : entry.getValue()) {
                 run(solution, output, times, verbose, submit);
             }
+
+            long end = System.currentTimeMillis();
+
+            if (times) System.out.printf("\nTook in total %s ms%n", (end - start));
         }
     }
 

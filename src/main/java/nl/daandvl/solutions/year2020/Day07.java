@@ -22,9 +22,7 @@ public class Day07 extends Solution {
 
     @Override
     protected void run(List<String> input) {
-        for(String rule : input) {
-            new Bag(rule);
-        }
+        input.forEach(Bag::new);
 
         Bag.bags.forEach(Bag::calculateContents);
 

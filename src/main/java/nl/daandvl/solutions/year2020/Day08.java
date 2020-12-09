@@ -22,9 +22,9 @@ public class Day08 extends Solution {
         a = runStartCode(input).acc;
         for (int i = 0; i < input.size(); i++) {
             List<String> instructionsCopy = new ArrayList<>(input);
-            String newVal = input.get(i).replaceAll("nop", "jmd");
+            String newVal = input.get(i).replaceAll("nop", "tmp");
             newVal = newVal.replaceAll("jmp", "nop");
-            newVal = newVal.replaceAll("jmd", "jmp");
+            newVal = newVal.replaceAll("tmp", "jmp");
 
             instructionsCopy.set(i, newVal);
 
@@ -55,7 +55,6 @@ public class Day08 extends Solution {
             passedIndexes.add(index);
             String instruction = input.get(index);
             String[] parts = instruction.split(" ");
-            parts[1] = parts[1].replaceAll("\\+", "");
 
             switch (parts[0]) {
                 case "nop": {
